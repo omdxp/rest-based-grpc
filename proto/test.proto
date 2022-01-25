@@ -1,0 +1,30 @@
+syntax = "proto3";
+
+package main;
+
+option go_package = ".";
+
+import "google/api/annotations.proto";
+
+service TestApi {
+   rpc Echo(ResponseRequest) returns (ResponseRequest) {
+       option (google.api.http) = {
+           post: "/echo"
+           body: "*"
+       };
+   }
+   rpc GetUser(UserRequest) returns (UserResponse) {}
+}
+
+message ResponseRequest {
+    string msg = 1;
+}
+
+message UserRequest {
+    string uuid = 1;
+}
+
+message UserResponse {
+    string name = 1;
+    int32 age = 2;
+}
